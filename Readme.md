@@ -26,10 +26,6 @@ The project is organized as follows:
 │   ├── test_models.py                      # Scripts to test trained models
 │   ├── training_LSTM_models_hlcc_4.py      # Advanced LSTM training configuration
 │   └── training_LSTM_models.py             # Standard LSTM training script
-│
-├── metatrader5                             # (Optional) Integration layer for MT5 platform
-│
-├── .gitignore                              # Git ignore rules for the entire project
 └── requirements.txt                        # Python backend dependencies
 ```
 
@@ -92,11 +88,7 @@ Usage
    - It fetches data from the Django API at regular intervals (every 2 minutes) and updates the chart.
 
 
-3. **MetaTrader 5 Integration**:
-   - The `metatrader5` folder handles integration with the MetaTrader 5 platform to fetch real-time market data.
-
-
-4. **Model Training**:
+3. **Model Training**:
    - The scripts in the `model_training_codes` folder handle the training of LSTM models using historical forex data. It includes:
      - `training_LSTM_models.py`: A script for training the LSTM models.
      - `data_preprocessing.py`: Preprocessing of raw data before training.
@@ -114,12 +106,6 @@ Requirements
 - Node.js and npm (for the frontend)
 - MetaTrader 5 (for fetching forex data)
 - Machine learning dependencies for model training (e.g., TensorFlow, scikit-learn)
-
-Development Notes
-
-- Make sure to adjust your MetaTrader 5 API credentials and configurations for fetching forex data in the `metatrader5` folder.
-- The trained models are stored in the `model_training_codes/trained_models` folder, which should be updated whenever you retrain the models.
-- The `frontend/src` folder contains React components, including those for displaying prediction data in a table and charts.
 
 License
 
