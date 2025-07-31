@@ -1,0 +1,8 @@
+env/
+forex_predictions_webapp/frontend/node_modules/
+__pycache__/
+forex_predictions_webapp/forex_app/__pycache__
+forex_predictions_webapp/forex_project/__pycache__
+dan-forex 
+currency_datasets
+metatrader5
