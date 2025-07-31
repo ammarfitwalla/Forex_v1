@@ -3,6 +3,7 @@ This project provides a web application for predicting forex market trends using
 Project Structure
 The project is organized as follows:
 
+```
 ├── forex_predictions_webapp                # Main Django application
 │   ├── forex_app                           # Django app with views, models, and APIs
 │   ├── forex_project                       # Django project configuration (settings, URLs, WSGI, etc.)
@@ -30,6 +31,7 @@ The project is organized as follows:
 │
 ├── .gitignore                              # Git ignore rules for the entire project
 └── requirements.txt                        # Python backend dependencies
+```
 
 
 Installation
