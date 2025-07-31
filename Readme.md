@@ -3,6 +3,17 @@ This project provides a web application for predicting forex market trends using
 Project Structure
 The project is organized as follows:
 
+
+## Output Charts
+Here is a sample chart showing the predicted vs actual forex prices:
+#### Prediction Table
+![Prediction Table](assets/images/tabular_data.png)
+#### Prediction Chart - High
+![Prediction Chart - High](assets/images/chart_high_data.png)
+#### Prediction Chart - Low
+![Prediction Chart - Low](assets/images/chart_low_data.png)
+
+
 ```
 ├── forex_predictions_webapp                # Main Django application
 │   ├── forex_app                           # Django app with views, models, and APIs
