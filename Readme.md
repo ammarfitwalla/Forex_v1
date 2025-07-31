@@ -106,8 +106,3 @@ Requirements
 - Node.js and npm (for the frontend)
 - MetaTrader 5 (for fetching forex data)
 - Machine learning dependencies for model training (e.g., TensorFlow, scikit-learn)
-
-License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
