@@ -1,8 +1,8 @@
 from datetime import datetime
-from mt5_utils import get_data_mt5
+from app.utils.mt5_utils import get_data_mt5
 from sqlalchemy.orm import Session
-from db_connection import SessionLocal
-from orm_models import Prediction
+from app.db.db_connection import SessionLocal
+from app.db.orm_models import Prediction
 
 def update_actuals(symbol, actual_high, actual_low, actual_open, actual_close, last_time):
     # Start a new session

@@ -1,7 +1,7 @@
 # models.py
 
 from sqlalchemy import Column, Integer, String, Float, DateTime
-from db_connection import Base
+from app.db.db_connection import Base
 
 class Prediction(Base):
     __tablename__ = "forex_app_prediction"

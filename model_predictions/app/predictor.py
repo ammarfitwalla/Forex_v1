@@ -1,21 +1,24 @@
 import os
+
+from app.services.insert_predictions import insert_prediction_to_db
+from app.services.updater import update_actuals
 # os['TF_CPP_MIN_LOG_LEVEL'] = '2'  # Suppress TensorFlow warnings
 os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0' # Disable oneDNN optimizations
 
 import numpy as np
 import pandas as pd
-from mt5_utils import get_data_mt5   # function that fetches candles from MT5
+from app.utils.mt5_utils import get_data_mt5   # function that fetches candles from MT5
 from tensorflow.keras.models import load_model
 from sklearn.preprocessing import StandardScaler
 # from models import Prediction
-from updater import update_actuals
-from insert_predictions import insert_prediction_to_db
+# from updater import update_actuals
+# from insert_predictions import insert_prediction_to_db
 
 # Load trained models once (avoid reloading every prediction)
 print(os.getcwd())
 
-high_model = load_model('ml_models'+os.sep+'high_models'+os.sep+'high.h5')
-low_model = load_model('ml_models'+os.sep+'low_models'+os.sep+'low.h5')
+high_model = load_model('app'+os.sep+'ml_models'+os.sep+'high_models'+os.sep+'high.h5')
+low_model = load_model('app'+os.sep+'ml_models'+os.sep+'low_models'+os.sep+'low.h5')
 # low_model = load_model(r'../ml_models/low_models/low.h5')
 
 def run_prediction(symbol='EURUSD', timeframe='5Min'):

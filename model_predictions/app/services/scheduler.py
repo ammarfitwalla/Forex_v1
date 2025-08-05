@@ -1,6 +1,6 @@
 import threading
 from datetime import datetime
-from predictor import run_prediction
+from app.predictor import run_prediction
 
 INTERVAL = 5  # minutes
 
@@ -21,6 +21,3 @@ def scheduled_job():
 
 def start_scheduler():
     scheduled_job()
-
-# Only start in the main process (avoid Django auto-reloader duplication)
-start_scheduler()

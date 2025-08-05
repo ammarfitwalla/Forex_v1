@@ -2,8 +2,8 @@
 
 from sqlalchemy.orm import Session
 from datetime import datetime
-from db_connection import SessionLocal
-from orm_models import Prediction
+from app.db.db_connection import SessionLocal
+from app.db.orm_models import Prediction
 
 # Function to insert prediction data into the database
 def insert_prediction_to_db(symbol, timeframe, forecast_time, high_forecast, low_forecast, last_candle):
