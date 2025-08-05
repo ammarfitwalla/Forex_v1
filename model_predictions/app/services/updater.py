@@ -1,5 +1,3 @@
-from datetime import datetime
-from app.utils.mt5_utils import get_data_mt5
 from sqlalchemy.orm import Session
 from app.db.db_connection import SessionLocal
 from app.db.orm_models import Prediction

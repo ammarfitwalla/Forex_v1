@@ -56,7 +56,6 @@ def run_prediction(symbol='EURUSD', timeframe='5Min'):
     # print(f"High Forecast (original scale): {high_forecast_original}")
     # print(f"Low Forecast (original scale): {low_forecast_original}")
 
-
     # Next candle time
     last_time = df['time'].iloc[-1]
     forecast_time = last_time + pd.to_timedelta(timeframe)
