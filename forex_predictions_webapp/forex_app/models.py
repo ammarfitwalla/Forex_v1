@@ -34,6 +34,15 @@ class Prediction(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
 
+    # --- Accuracy & Evaluation ---
+    met_or_missed_high = models.CharField(max_length=10, null=True, blank=True)  # values: "met", "missed"
+    met_or_missed_low = models.CharField(max_length=10, null=True, blank=True)
+    high_error_pips = models.FloatField(null=True, blank=True)  # e.g., 2.5 pips difference
+    low_error_pips = models.FloatField(null=True, blank=True)  # e.g., 3.0 pips difference
+    high_accuracy_score = models.FloatField(null=True, blank=True)  # e.g., 2.5 pips difference
+    low_accuracy_score = models.FloatField(null=True, blank=True)
+
+
     def __str__(self):
         return f"{self.symbol} {self.timeframe} {self.forecast_time}"
 

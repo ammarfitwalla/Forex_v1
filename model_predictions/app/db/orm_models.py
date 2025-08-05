@@ -28,3 +28,9 @@ class Prediction(Base):
     actual_open = Column(Float, nullable=True)
     actual_close = Column(Float, nullable=True)
 
+    met_or_missed_high = Column(String, nullable=True)
+    met_or_missed_low = Column(String, nullable=True)
+    high_error_pips = Column(Float, nullable=True)
+    low_error_pips = Column(Float, nullable=True)
+    high_accuracy_score = Column(Float, nullable=True)
+    low_accuracy_score = Column(Float, nullable=True)

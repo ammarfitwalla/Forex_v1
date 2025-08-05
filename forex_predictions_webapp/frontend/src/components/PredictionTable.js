@@ -28,11 +28,9 @@ const PredictionTable = () => {
 
   useEffect(() => {
     fetchPredictions(page);
-
     const interval = setInterval(() => {
       fetchPredictions(page);
     }, 120000);
-
     return () => clearInterval(interval);
   }, [page]);
 
@@ -55,6 +53,10 @@ const PredictionTable = () => {
             <th>Predicted Low</th>
             <th>Actual High</th>
             <th>Actual Low</th>
+            <th>Met/Missed High</th>
+            <th>Met/Missed Low</th>
+            <th>High Accuracy (pips) %</th>
+            <th>Low Accuracy (pips) %</th>
           </tr>
         </thead>
         <tbody>
@@ -63,21 +65,29 @@ const PredictionTable = () => {
               <tr key={prediction.id} style={{ backgroundColor: prediction.actual_high === null ? '#fff3cd' : 'white' }}>
                 <td>{prediction.symbol}</td>
                 <td>{new Date(prediction.forecast_time).toLocaleString()}</td>
-                <td>{prediction.high_forecast.toFixed(6)}</td>
-                <td>{prediction.low_forecast.toFixed(6)}</td>
+                <td>{prediction.high_forecast?.toFixed(6)}</td>
+                <td>{prediction.low_forecast?.toFixed(6)}</td>
                 <td>{prediction.actual_high ?? 'N/A'}</td>
                 <td>{prediction.actual_low ?? 'N/A'}</td>
+                <td style={{ color: prediction.met_or_missed_high === 'met' ? 'green' : prediction.met_or_missed_high === 'missed' ? 'red' : 'black' }}>
+                  {prediction.met_or_missed_high ?? 'N/A'}
+                </td>
+                <td style={{ color: prediction.met_or_missed_low === 'met' ? 'green' : prediction.met_or_missed_low === 'missed' ? 'red' : 'black' }}>
+                  {prediction.met_or_missed_low ?? 'N/A'}
+                </td>
+                <td>{prediction.high_accuracy_score?.toFixed(2) ?? 'N/A'}</td>
+                <td>{prediction.low_accuracy_score?.toFixed(2) ?? 'N/A'}</td>
               </tr>
             ))
           ) : (
             <tr>
-              <td colSpan="6">No predictions available.</td>
+              <td colSpan="10">No predictions available.</td>
             </tr>
           )}
         </tbody>
       </table>
 
-      <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'center'}}>
+      <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'center' }}>
         <Pagination count={totalPages} page={page} onChange={(event, value) => setPage(value)} color="primary" />
       </div>
     </div>

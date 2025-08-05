@@ -26,7 +26,11 @@ class PredictionSerializer(serializers.ModelSerializer):
             'high_sma',
             'high_fma',
             'low_sma',
-            'low_fma'
+            'low_fma',
+            'met_or_missed_high',
+            'met_or_missed_low',
+            'high_accuracy_score',
+            'low_accuracy_score',
         ]
         read_only_fields = ['id', 'formatted_forecast_time']  # Making 'id' and 'formatted_forecast_time' read-only
         extra_kwargs = {
