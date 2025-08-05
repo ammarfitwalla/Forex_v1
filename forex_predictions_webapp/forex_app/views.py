@@ -16,7 +16,7 @@ class PredictionPagination(PageNumberPagination):
 @api_view(['GET'])
 def latest_predictions(request):
     paginator = PredictionPagination()
-    predictions = Prediction.objects.all().order_by('-forecast_time')
+    predictions = Prediction.objects.all().order_by('-forecast_time')[:50]
     result_page = paginator.paginate_queryset(predictions, request)
     serializer = PredictionSerializer(result_page, many=True)
     return paginator.get_paginated_response(serializer.data)
