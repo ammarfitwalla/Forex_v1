@@ -1,9 +1,8 @@
 # main.py
 
-from app.services.scheduler import start_scheduler  # or whatever the main function is
+from app.services.scheduler import start_scheduler
 
 if __name__ == "__main__":
-    print("Starting Forex AI System...")
     start_scheduler()
-    print("Scheduler started successfully.")
-    # The scheduler will run indefinitely, so no need for a loop here.
+    print("[Main] Scheduler started. Running predictions every 5 minutes.")
+    # The scheduler will run in the background, so the script will keep running.
