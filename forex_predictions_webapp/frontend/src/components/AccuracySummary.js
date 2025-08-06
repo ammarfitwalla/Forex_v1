@@ -17,7 +17,6 @@ const fetchSummary = async () => {
     setLoading(false);
   }
 };
-    
 
   useEffect(() => {
     fetchSummary();
