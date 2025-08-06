@@ -1,5 +1,4 @@
 import os
-
 from app.services.insert_predictions import insert_prediction_to_db
 from app.services.updater import update_actuals
 # os['TF_CPP_MIN_LOG_LEVEL'] = '2'  # Suppress TensorFlow warnings
@@ -7,7 +6,7 @@ os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0' # Disable oneDNN optimizations
 
 import numpy as np
 import pandas as pd
-from app.utils.mt5_utils import get_data_mt5   # function that fetches candles from MT5
+from app.utils.mt5_utils import get_data_yf #get_data_mt5   # function that fetches candles from MT5
 from tensorflow.keras.models import load_model
 from sklearn.preprocessing import StandardScaler
 # from models import Prediction
@@ -22,7 +21,10 @@ low_model = load_model('app'+os.sep+'ml_models'+os.sep+'low_models'+os.sep+'low.
 # low_model = load_model(r'../ml_models/low_models/low.h5')
 
 def run_prediction(symbol='EURUSD', timeframe='5Min'):
-    df = get_data_mt5(symbol, timeframe)
+    # df = get_data_mt5(symbol, timeframe)
+    df = get_data_yf(symbol+"=X", '5m')  # Fetch data for EUR/USD with 5-minute intervals
+    print(df.tail())  # Display the last few rows of the data
+    print(df.columns.to_list())
     if df is None or df.empty:
         print("No data fetched from MT5")
         return None
@@ -33,9 +35,9 @@ def run_prediction(symbol='EURUSD', timeframe='5Min'):
     low_scaler = StandardScaler()
 
     # Step 2: Scale the data using StandardScaler (fit and transform)
-    cols = ['high', 'high_rsi', 'high_sma', 'high_fma']
+    cols = ['High', 'High_rsi', 'high_sma', 'high_fma']
     high_scaled = high_scaler.fit_transform(df[cols])  # Fit and transform on high data
-    low_scaled = low_scaler.fit_transform(df[['low', 'low_rsi', 'low_sma', 'low_fma']])  # Fit and transform on low data
+    low_scaled = low_scaler.fit_transform(df[['Low', 'Low_rsi', 'low_sma', 'low_fma']])  # Fit and transform on low data
 
     N_FUTURE, N_PAST = 1, 48
     x_high = [high_scaled[-N_PAST:]]
@@ -57,7 +59,7 @@ def run_prediction(symbol='EURUSD', timeframe='5Min'):
     # print(f"Low Forecast (original scale): {low_forecast_original}")
 
     # Next candle time
-    last_time = df['time'].iloc[-1]
+    last_time = df['Datetime'].iloc[-1]
     forecast_time = last_time + pd.to_timedelta(timeframe)
 
     # Last candle snapshot (input candle)
@@ -66,10 +68,10 @@ def run_prediction(symbol='EURUSD', timeframe='5Min'):
     print(f"[Predictor] Forecast for {symbol} at {forecast_time}: high={high_forecast}, low={low_forecast}")
 
     update_actuals(symbol=symbol,
-                   actual_high=last_candle['high'],
-                   actual_low=last_candle['low'],
-                   actual_open=last_candle['open'],
-                   actual_close=last_candle['close'],
+                   actual_high=last_candle['High'],
+                   actual_low=last_candle['Low'],
+                   actual_open=last_candle['Open'],
+                   actual_close=last_candle['Close'],
                    last_time=last_time)
 
     insert_prediction_to_db(
