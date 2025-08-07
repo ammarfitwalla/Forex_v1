@@ -24,7 +24,7 @@ def latest_predictions(request):
 
 @api_view(['GET'])
 def prediction_by_symbol(request, symbol):
-    predictions = Prediction.objects.filter(symbol=symbol).order_by('-forecast_time')[:50]
+    predictions = Prediction.objects.filter(symbol=symbol).order_by('-forecast_time')[:100]
     serializer = PredictionSerializer(predictions, many=True)
     return Response(serializer.data)
 
@@ -60,7 +60,7 @@ def accuracy_summary(request):
     # Iterate through each unique symbol to calculate summary metrics
     for symbol in symbols:
         print(f"[Summary] Processing symbol: {symbol}")
-        qs = Prediction.objects.filter(symbol=symbol).order_by('-forecast_time')[:50]
+        qs = Prediction.objects.filter(symbol=symbol).order_by('-forecast_time')[:100]
         
         print(f"[Summary] Processing symbol: {symbol}, total predictions: {qs.count()}")
 
