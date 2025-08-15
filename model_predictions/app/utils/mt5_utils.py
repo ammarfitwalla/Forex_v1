@@ -1,7 +1,7 @@
 import yfinance as yf
-import numpy as np
+# import numpy as np
 import pandas as pd
-from datetime import datetime, timedelta
+# from datetime import datetime, timedelta
 
 # Function to calculate RSI (Relative Strength Index)
 def get_rsi(file, value, n):
@@ -67,6 +67,7 @@ def get_data_yf(currency_name, interval):
         data = data.fillna(data.mean())
         data.reset_index(inplace=True)  # Reset index to have 'Datetime' as a column
         data['Datetime'] = pd.to_datetime(data['Datetime'])  # Ensure 'Datetime' is in datetime format
+        
 
         return data.tail(5000)  # Keep the latest 5000 rows
 
